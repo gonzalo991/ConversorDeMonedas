@@ -1,14 +1,12 @@
 package enums;
 
-import java.util.Arrays;
-
 public enum OpcionesDeConversion {
     CONVERSOR_DE_MONEDAS("Conversor de monedas"),
     CONVERSOR_DE_TEMPERATURA("Conversor de temperatura");
 
     private String descripcion;
 
-    private OpcionesDeConversion(String descripcion) {
+    OpcionesDeConversion(String descripcion) {
         this.descripcion = descripcion;
     }
 

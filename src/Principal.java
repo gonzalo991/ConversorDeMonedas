@@ -1,3 +1,4 @@
+import enums.ParesDeDivisas;
 import excepciones.ErrorDeTipeoException;
 import enums.ConversionDeMonedas;
 import modelos.Moneda;
@@ -24,7 +25,7 @@ public class Principal {
                 opciones[0]
         );
 
-        if(selectedValue.equals(OpcionesDeConversion.CONVERSOR_DE_MONEDAS.getDescripcion())){
+        if(selectedValue == OpcionesDeConversion.CONVERSOR_DE_MONEDAS){
             do{
                 ejecutarConversionDeMonedas();
                 int confirm = JOptionPane.showConfirmDialog(null, "¿Deseas continuar?",
@@ -42,23 +43,49 @@ public class Principal {
         }
     }
 
-    public static List<String> getParesDeDivisas(ConversionDeMonedas moneda) {
-        return switch (moneda) {
-            case PESOS_A_DOLAR -> List.of("ARS", "USD");
-            case PESOS_A_EURO -> List.of("ARS", "EUR");
-            case PESOS_A_LIBRAS -> List.of("ARS", "GBP");
-            case PESOS_A_YEN -> List.of("ARS", "JPY");
-            case PESOS_A_WON_COREANO -> List.of("ARS", "KRW");
-            case DOLAR_A_PESOS -> List.of("USD", "ARS");
-            case EURO_A_PESOS -> List.of("EUR", "ARS");
-            case LIBRAS_A_PESOS -> List.of("GBP", "ARS");
-            case YEN_A_PESOS -> List.of("JPY", "ARS");
-            case WON_COREANO_A_PESOS -> List.of("KRW", "ARS");
-        };
+    public static List<ParesDeDivisas> getParesDeDivisas(ConversionDeMonedas moneda) {
+        List<ParesDeDivisas> pares = new ArrayList<>();
+
+        switch (moneda) {
+            case PESOS_A_DOLAR:
+                pares.add(ParesDeDivisas.PESOS_A_DOLAR);
+                break;
+            case PESOS_A_EURO:
+                pares.add(ParesDeDivisas.PESOS_A_EURO);
+                break;
+            case PESOS_A_LIBRAS:
+                pares.add(ParesDeDivisas.PESOS_A_LIBRAS);
+                break;
+            case PESOS_A_YEN:
+                pares.add(ParesDeDivisas.PESOS_A_YEN);
+                break;
+            case PESOS_A_WON_COREANO:
+                pares.add(ParesDeDivisas.PESOS_A_WON_COREANO);
+                break;
+            case DOLAR_A_PESOS:
+                pares.add(ParesDeDivisas.DOLAR_A_PESOS);
+                break;
+            case EURO_A_PESOS:
+                pares.add(ParesDeDivisas.EURO_A_PESOS);
+                break;
+            case LIBRAS_A_PESOS:
+                pares.add(ParesDeDivisas.LIBRAS_A_PESOS);
+                break;
+            case YEN_A_PESOS:
+                pares.add(ParesDeDivisas.YEN_A_PESOS);
+                break;
+            case WON_COREANO_A_PESOS:
+                pares.add(ParesDeDivisas.WON_COREANO_A_PESOS);
+                break;
+        }
+        return pares;
     }
 
     public static void ejecutarConversionDeMonedas(){
         try {
+            String base_code = null;
+            String target_code = null;
+
             ConversorDeMonedas consulta = new ConversorDeMonedas();
             ConversionDeMonedas[] conversiones = ConversionDeMonedas.values();
 
@@ -66,14 +93,19 @@ public class Principal {
                     .showInputDialog(null,
                             "Selecciona la moneda a la que deseas convertir tu dinero: ",
                             "Monedas", JOptionPane.INFORMATION_MESSAGE,
-                            null,conversiones, conversiones[0]);
-            List<String> paresDeDivisas = getParesDeDivisas(monedas);
-            String base_code = paresDeDivisas.getFirst();
-            String target_code = paresDeDivisas.getLast();
+                            null, conversiones, conversiones[0]);
+
+            List<ParesDeDivisas> pares = getParesDeDivisas(monedas);
+
+            for (ParesDeDivisas par : pares) {
+                base_code = par.getFrom().toUpperCase();
+                target_code = par.getTo().toUpperCase();
+            }
 
             float conversion_rate = Float.parseFloat(JOptionPane.showInputDialog(null,
-                    "Ingresa la cantidad de dinero que deseas convertir:","Input"));
+                    "Ingresa la cantidad de dinero que deseas convertir:", null));
 
+            System.out.println("valores: "+base_code+", "+ target_code+", "+conversion_rate);
 
             Moneda moneda = consulta.convertirMoneda(base_code, target_code, conversion_rate);
             double valorConvertido = moneda.conversion_result();

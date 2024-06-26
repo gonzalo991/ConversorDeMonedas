@@ -6,8 +6,8 @@
   "time_last_update_utc": "Wed, 26 Jun 2024 00:00:01 +0000",
   "time_next_update_unix": "1719446401",
   "time_next_update_utc": "Thu, 27 Jun 2024 00:00:01 +0000",
-  "base_code": "EUR",
+  "base_code": "USD",
   "target_code": "ARS",
-  "conversion_rate": 974.8574,
-  "conversion_result": 4874.287
+  "conversion_rate": 909.67,
+  "conversion_result": 9096.7
 }

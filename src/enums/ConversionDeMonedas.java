@@ -16,7 +16,7 @@ public enum ConversionDeMonedas {
 
     private String descripcion;
 
-    private ConversionDeMonedas(String descripcion) {
+    ConversionDeMonedas(String descripcion) {
         this.descripcion = descripcion;
     }
 

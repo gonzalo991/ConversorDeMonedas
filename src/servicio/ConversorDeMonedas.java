@@ -2,7 +2,6 @@ package servicio;
 
 import com.google.gson.Gson;
 import modelos.Moneda;
-import modelos.Resultado;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
@@ -17,8 +16,9 @@ public class ConversorDeMonedas {
     public Moneda convertirMoneda(String base_code, String target_code, float conversion_rate) throws UnsupportedEncodingException {
 
         // https://v6.exchangerate-api.com/v6/%s/pair/%s/%s/%d
-        String key = URLEncoder.encode("d4d919918f8225b3d183fdaa", StandardCharsets.UTF_8.toString());
-        String url = String.format("https://v6.exchangerate-api.com/v6/%s/pair/%s/%s/%f",
+        String apiKey = "d4d919918f8225b3d183fdaa";
+        String key = URLEncoder.encode(apiKey, StandardCharsets.UTF_8.toString());
+        String url = String.format("https://v6.exchangerate-api.com/v6/%s/pair/%s/%s/%.1f",
                 key, base_code, target_code, conversion_rate);
         URI direccion = URI.create(url);
 
@@ -29,11 +29,10 @@ public class ConversorDeMonedas {
         try{
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            Resultado resultado = new Gson().fromJson(response.body(), Resultado.class);
-            return resultado.getResult();
+            return new Gson().fromJson(response.body(), Moneda.class);
 
         } catch(Exception e){
-            throw new RuntimeException("No se encontraron las monedas");
+            throw new RuntimeException("No se encontraron las monedas"+ e.getMessage());
         }
     }
 }
