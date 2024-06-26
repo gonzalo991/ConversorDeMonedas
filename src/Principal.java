@@ -3,12 +3,11 @@ import excepciones.ErrorDeTipeoException;
 import enums.ConversionDeMonedas;
 import modelos.Moneda;
 import enums.OpcionesDeConversion;
-import servicio.ConversorDeMonedas;
+import servicio.Conversor;
 import servicio.GeneradorDeArchivos;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Principal {
@@ -86,7 +85,7 @@ public class Principal {
             String base_code = null;
             String target_code = null;
 
-            ConversorDeMonedas consulta = new ConversorDeMonedas();
+            Conversor consulta = new Conversor();
             ConversionDeMonedas[] conversiones = ConversionDeMonedas.values();
 
             ConversionDeMonedas monedas = (ConversionDeMonedas) JOptionPane
