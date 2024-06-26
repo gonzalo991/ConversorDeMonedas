@@ -39,12 +39,12 @@ public class GeneradorDeArchivos {
      * @param temperatura Objeto de tipo Temperatura a guardar en JSON.
      * @throws IOException Si ocurre un error al escribir el archivo.
      */
-    public void guardarConsultaTemperatura(Temperatura temperatura) throws IOException {
+    public void guardarConsultaTemperatura(Temperatura temperatura, String escalaFinal) throws IOException {
         // Configurar Gson para formatear el JSON de manera legible
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         // Crear FileWriter para escribir en el archivo con el nombre basado en la representación textual de la temperatura
-        FileWriter escritura = new FileWriter(temperatura.toString() + ".json");
+        FileWriter escritura = new FileWriter(temperatura.getEscala() + escalaFinal.replaceAll(" ","")+ ".json");
 
         // Convertir el objeto Temperatura a JSON y escribirlo en el archivo
         escritura.write(gson.toJson(temperatura));

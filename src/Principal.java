@@ -1,6 +1,6 @@
 import enums.OpcionesDeConversion;
-import modelos.Temperatura;
 import utils.UtilsMonedas;
+import utils.UtilsTemperatura;
 
 import javax.swing.*;
 
@@ -42,10 +42,16 @@ public class Principal {
                     break;
                 }
             } else if (selectedValue == OpcionesDeConversion.CONVERSOR_DE_TEMPERATURA) {
-                Temperatura temperatura = new Temperatura();
+                UtilsTemperatura.ejecutarConversionDeTemperaturas();
 
+                // Preguntar al usuario si desea continuar o terminar
+                int confirm = JOptionPane.showConfirmDialog(null, "¿Deseas continuar?",
+                        "Select an option", JOptionPane.YES_NO_CANCEL_OPTION);
 
-
+                if (confirm != JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(null, "Programa terminado.");
+                    break;
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Programa terminado.");
                 break;

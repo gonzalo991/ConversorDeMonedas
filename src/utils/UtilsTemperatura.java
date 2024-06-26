@@ -1,7 +1,10 @@
 package utils;
 import enums.ConversionesDeTemperatura;
 import modelos.Temperatura;
+import servicio.GeneradorDeArchivos;
+
 import javax.swing.*;
+import java.io.IOException;
 
 public class UtilsTemperatura {
     /**
@@ -61,25 +64,38 @@ public class UtilsTemperatura {
         return temperatura;
     }
 
-    private static void ejecutarConversionDeTemperaturas(){
+    public static void ejecutarConversionDeTemperaturas() {
+
         String escala = null;
         double valorConvertido;
         String respuesta = null;
         Temperatura resultado = new Temperatura();
 
-        ConversionesDeTemperatura[] conversiones = ConversionesDeTemperatura.values();
-        double valorEnGrados = obtenerValorEnGrados();
+        try {
+            ConversionesDeTemperatura[] conversiones = ConversionesDeTemperatura.values();
+            double valorEnGrados = obtenerValorEnGrados();
 
-        ConversionesDeTemperatura conversionElegida = (ConversionesDeTemperatura) JOptionPane
-                .showInputDialog(null,
-                        "Selecciona la moneda a la que deseas convertir tu dinero: ",
-                        "Monedas", JOptionPane.INFORMATION_MESSAGE,
-                        null, conversiones, conversiones[0]);
+            ConversionesDeTemperatura conversionElegida = (ConversionesDeTemperatura) JOptionPane
+                    .showInputDialog(null,
+                            "Selecciona la moneda a la que deseas convertir tu dinero: ",
+                            "Monedas", JOptionPane.INFORMATION_MESSAGE,
+                            null, conversiones, conversiones[0]);
 
-        resultado = getTemperatura(conversionElegida, valorEnGrados);
-        valorConvertido = resultado.getValorEnGrados();
-        escala = resultado.getEscala();
-        // Construir un mensaje con el resultado de la conversión
-        respuesta = String.format("La cantidad convertida es: %.2f, Grados %s", valorConvertido, escala);
+            resultado = getTemperatura(conversionElegida, valorEnGrados);
+            valorConvertido = resultado.getValorEnGrados();
+            escala = resultado.getEscala();
+            // Construir un mensaje con el resultado de la conversión
+            respuesta = String.format("La cantidad convertida es: %.2f, Grados %s", valorConvertido, escala);
+
+            // Mostrar el resultado de la conversión en una ventana de diálogo
+            JOptionPane.showMessageDialog(null, respuesta);
+
+            GeneradorDeArchivos generador = new GeneradorDeArchivos();
+            generador.guardarConsultaTemperatura(resultado, conversionElegida.getDescripcion());
+        } catch (IOException e) {
+            System.out.println("Ocurrió un error: "+e.getMessage());
+        } catch (Exception e){
+            System.out.println("Error inesperado en la conversión: "+e.getMessage());
+        }
     }
 }
