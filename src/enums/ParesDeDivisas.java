@@ -1,5 +1,8 @@
 package enums;
 
+/**
+ * Enumeración que representa diferentes pares de divisas para conversiones.
+ */
 public enum ParesDeDivisas {
     PESOS_A_DOLAR("ARS", "USD"),
     PESOS_A_EURO("ARS", "EUR"),
@@ -15,15 +18,31 @@ public enum ParesDeDivisas {
     private String from;
     private String to;
 
+    /**
+     * Constructor privado de ParesDeDivisas.
+     *
+     * @param from Código de la moneda de origen.
+     * @param to   Código de la moneda de destino.
+     */
     ParesDeDivisas(String from, String to) {
         this.from = from;
         this.to = to;
     }
 
+    /**
+     * Obtiene el código de la moneda de origen.
+     *
+     * @return Código de la moneda de origen.
+     */
     public String getFrom() {
         return from;
     }
 
+    /**
+     * Obtiene el código de la moneda de destino.
+     *
+     * @return Código de la moneda de destino.
+     */
     public String getTo() {
         return to;
     }

@@ -1,7 +1,8 @@
 package enums;
 
-import java.util.Arrays;
-
+/**
+ * Enumeración que representa diferentes tipos de conversiones de monedas.
+ */
 public enum ConversionDeMonedas {
     PESOS_A_DOLAR("De Pesos a Dólar"),
     PESOS_A_EURO("De Pesos a Euro"),
@@ -16,14 +17,29 @@ public enum ConversionDeMonedas {
 
     private String descripcion;
 
+    /**
+     * Constructor privado de ConversionDeMonedas.
+     *
+     * @param descripcion La descripción de la conversión de moneda.
+     */
     ConversionDeMonedas(String descripcion) {
         this.descripcion = descripcion;
     }
 
+    /**
+     * Obtiene la descripción asociada con la conversión de moneda.
+     *
+     * @return La descripción de la conversión de moneda.
+     */
     public String getDescripcion() {
         return descripcion;
     }
 
+    /**
+     * Sobrescribe el método toString para devolver la descripción de la conversión de moneda.
+     *
+     * @return La descripción de la conversión de moneda.
+     */
     @Override
     public String toString() {
         return descripcion;
