@@ -3,6 +3,7 @@ import excepciones.ErrorDeTipeoException;
 import enums.ConversionDeMonedas;
 import modelos.Moneda;
 import enums.OpcionesDeConversion;
+import modelos.Temperatura;
 import servicio.Conversor;
 import servicio.GeneradorDeArchivos;
 
@@ -48,7 +49,8 @@ public class Principal {
                     break;
                 }
             } else if (selectedValue == OpcionesDeConversion.CONVERSOR_DE_TEMPERATURA) {
-                System.out.println(selectedValue);
+                Temperatura temperatura = new Temperatura();
+
             } else {
                 JOptionPane.showMessageDialog(null, "Programa terminado.");
                 break;
@@ -113,6 +115,9 @@ public class Principal {
             Conversor consulta = new Conversor();
             ConversionDeMonedas[] conversiones = ConversionDeMonedas.values();
 
+            // Solicitar al usuario que ingrese la cantidad de dinero a convertir
+            float conversion_rate = obtenerConversionRate();
+
             // Mostrar un cuadro de diálogo para que el usuario seleccione el tipo de conversión de moneda
             ConversionDeMonedas monedas = (ConversionDeMonedas) JOptionPane
                     .showInputDialog(null,
@@ -128,9 +133,6 @@ public class Principal {
                 base_code = par.getFrom().toUpperCase(); // Código de moneda de origen en mayúsculas
                 target_code = par.getTo().toUpperCase(); // Código de moneda de destino en mayúsculas
             }
-
-            // Solicitar al usuario que ingrese la cantidad de dinero a convertir
-            float conversion_rate = obtenerConversionRate();
 
 
             // Realizar la conversión de moneda utilizando el servicio Conversor

@@ -2,6 +2,7 @@ package servicio;
 
 import com.google.gson.Gson;
 import modelos.Moneda;
+import modelos.Temperatura;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
