@@ -3,7 +3,7 @@ package modelos;
 import interfaces.ITemperatura;
 
 public class Temperatura implements ITemperatura {
-    private int valorEnGrados;
+    private double valorEnGrados;
     private String escala;
 
     public Temperatura() {
@@ -14,16 +14,16 @@ public class Temperatura implements ITemperatura {
      * @param valorEnGrados El valor de la temperatura en grados.
      * @param escala La escala de la temperatura (Celsius, Kelvin, Fahrenheit).
      */
-    public Temperatura(int valorEnGrados, String escala){
+    public Temperatura(double valorEnGrados, String escala){
         this.valorEnGrados = valorEnGrados;
         this.escala = escala;
     }
 
-    public int getValorEnGrados() {
+    public double getValorEnGrados() {
         return valorEnGrados;
     }
 
-    public void setValorEnGrados(int valorEnGrados) {
+    public void setValorEnGrados(double valorEnGrados) {
         this.valorEnGrados = valorEnGrados;
     }
 
@@ -41,9 +41,11 @@ public class Temperatura implements ITemperatura {
      * @return Temperatura en Kelvin.
      */
     @Override
-    public double convertirCelsiusAKelvin(double celsius) {
+    public void convertirCelsiusAKelvin(double celsius) {
         // La fórmula para convertir de Celsius a Kelvin es agregar 273.15 a la temperatura en Celsius.
-        return celsius + 273.15;
+        double resultado = celsius + 273.15;
+        setValorEnGrados(resultado);
+        setEscala("Kelvin");
     }
 
     /**
@@ -52,9 +54,11 @@ public class Temperatura implements ITemperatura {
      * @return Temperatura en grados Fahrenheit.
      */
     @Override
-    public double convertirCelsiusAFahrenheit(double celsius) {
+    public void convertirCelsiusAFahrenheit(double celsius) {
         // La fórmula para convertir de Celsius a Fahrenheit es multiplicar por 9/5 y agregar 32.
-        return (celsius * 9/5) + 32;
+        double resultado = (celsius * 9/5) + 32;
+        setValorEnGrados(resultado);
+        setEscala("Fahrenheit");
     }
 
     /**
@@ -63,9 +67,11 @@ public class Temperatura implements ITemperatura {
      * @return Temperatura en grados Celsius.
      */
     @Override
-    public double convertirKelvinACelsius(double kelvin) {
+    public void convertirKelvinACelsius(double kelvin) {
         // La fórmula para convertir de Kelvin a Celsius es restar 273.15 a la temperatura en Kelvin.
-        return kelvin - 273.15;
+        double resultado = kelvin - 273.15;
+        setValorEnGrados(resultado);
+        setEscala("Celsius");
     }
 
     /**
@@ -74,9 +80,11 @@ public class Temperatura implements ITemperatura {
      * @return Temperatura en grados Fahrenheit.
      */
     @Override
-    public double convertirKelvinAFahrenheit(double kelvin) {
+    public void convertirKelvinAFahrenheit(double kelvin) {
         // Primero convertimos de Kelvin a Celsius, luego de Celsius a Fahrenheit.
-        return (kelvin - 273.15) * 9/5 + 32;
+        double resultado = (kelvin - 273.15) * 9/5 + 32;
+        setValorEnGrados(resultado);
+        setEscala("Fahrenheit");
     }
 
     /**
@@ -85,9 +93,11 @@ public class Temperatura implements ITemperatura {
      * @return Temperatura en grados Celsius.
      */
     @Override
-    public double convertirFahrenheitACelsius(double fahrenheit) {
+    public void convertirFahrenheitACelsius(double fahrenheit) {
         // La fórmula para convertir de Fahrenheit a Celsius es restar 32 y luego multiplicar por 5/9.
-        return (fahrenheit - 32) * 5/9;
+        double resultado = (fahrenheit - 32) * 5/9;
+        setValorEnGrados(resultado);
+        setEscala("Celsius");
     }
 
     /**
@@ -96,8 +106,10 @@ public class Temperatura implements ITemperatura {
      * @return Temperatura en Kelvin.
      */
     @Override
-    public double convertirFahrenheitAKelvin(double fahrenheit) {
+    public void convertirFahrenheitAKelvin(double fahrenheit) {
         // Primero convertimos de Fahrenheit a Celsius, luego de Celsius a Kelvin.
-        return (fahrenheit - 32) * 5/9 + 273.15;
+        double resultado = (fahrenheit - 32) * 5/9 + 273.15;
+        setValorEnGrados(resultado);
+        setEscala("Kelvin");
     }
 }

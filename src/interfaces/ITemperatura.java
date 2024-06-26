@@ -1,14 +1,15 @@
 package interfaces;
 
+import enums.ConversionesDeTemperatura;
 import modelos.Temperatura;
 
 public interface ITemperatura {
-    double convertirCelsiusAKelvin(double celsius);
-    double convertirCelsiusAFahrenheit(double celsius);
+    void convertirCelsiusAKelvin(double celsius);
+    void convertirCelsiusAFahrenheit(double celsius);
 
-    double convertirKelvinACelsius(double kelvin);
-    double convertirKelvinAFahrenheit(double kelvin);
+    void convertirKelvinACelsius(double kelvin);
+    void convertirKelvinAFahrenheit(double kelvin);
 
-    double convertirFahrenheitACelsius(double fahrenheit);
-    double convertirFahrenheitAKelvin(double fahrenheit);
+    void convertirFahrenheitACelsius(double fahrenheit);
+    void convertirFahrenheitAKelvin(double fahrenheit);
 }
