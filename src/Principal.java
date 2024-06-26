@@ -130,11 +130,8 @@ public class Principal {
             }
 
             // Solicitar al usuario que ingrese la cantidad de dinero a convertir
-            float conversion_rate = Float.parseFloat(JOptionPane.showInputDialog(null,
-                    "Ingresa la cantidad de dinero que deseas convertir:", null));
+            float conversion_rate = obtenerConversionRate();
 
-            // Mostrar en consola los valores seleccionados para la conversión
-            System.out.println("Valores: " + base_code + ", " + target_code + ", " + conversion_rate);
 
             // Realizar la conversión de moneda utilizando el servicio Conversor
             Moneda moneda = consulta.convertirMoneda(base_code, target_code, conversion_rate);
@@ -163,5 +160,37 @@ public class Principal {
             // Capturar y manejar cualquier otra excepción inesperada
             System.out.println("Ocurrió un error inesperado: " + e.getMessage());
         }
+    }
+
+    /**
+     * Solicita al usuario que ingrese una tasa de conversión numérica y valida la entrada.
+     *
+     * Mientras el usuario no ingrese un valor numérico válido, muestra un mensaje de error
+     * y solicita nuevamente la entrada.
+     *
+     * @return La tasa de conversión ingresada por el usuario como un número de tipo float.
+     */
+    private static float obtenerConversionRate() {
+        float conversion_rate;
+
+        // Bucle infinito para manejar la entrada del usuario hasta que ingrese un valor válido.
+        while (true) {
+            // Solicitar al usuario que ingrese la tasa de conversión como una cadena.
+            String input = JOptionPane.showInputDialog(null,
+                    "Ingresa la cantidad de dinero que deseas convertir:", null);
+
+            try {
+                // Intentar convertir la cadena ingresada a un número flotante.
+                conversion_rate = Float.parseFloat(input);
+                break;  // Salir del bucle si la conversión fue exitosa.
+            } catch (NumberFormatException e) {
+                // Capturar la excepción si la entrada no es numérica.
+                JOptionPane.showMessageDialog(null,
+                        "Error: Ingresa un valor numérico válido para la tasa de conversión.",
+                        "Error de entrada", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        return conversion_rate;  // Devolver la tasa de conversión como float.
     }
 }
