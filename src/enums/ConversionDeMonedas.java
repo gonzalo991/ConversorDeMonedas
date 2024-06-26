@@ -1,5 +1,7 @@
 package enums;
 
+import java.util.Arrays;
+
 public enum ConversionDeMonedas {
     PESOS_A_DOLAR("De Pesos a Dólar"),
     PESOS_A_EURO("De Pesos a Euro"),
@@ -14,7 +16,8 @@ public enum ConversionDeMonedas {
 
     private String descripcion;
 
-    ConversionDeMonedas(String descripcion) {
+    private ConversionDeMonedas(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public String getDescripcion() {

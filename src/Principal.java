@@ -14,7 +14,7 @@ public class Principal {
     public static void main(String[] args) {
         OpcionesDeConversion[] opciones = OpcionesDeConversion.values();
 
-        OpcionesDeConversion selectedValue = (OpcionesDeConversion) JOptionPane.showInputDialog(
+        Object selectedValue = JOptionPane.showInputDialog(
                 null,
                 "Seleccione una opción de conversión",
                 "Input",
@@ -24,7 +24,7 @@ public class Principal {
                 opciones[0]
         );
 
-        if(selectedValue == OpcionesDeConversion.CONVERSOR_DE_MONEDAS){
+        if(selectedValue.equals(OpcionesDeConversion.CONVERSOR_DE_MONEDAS.getDescripcion())){
             do{
                 ejecutarConversionDeMonedas();
                 int confirm = JOptionPane.showConfirmDialog(null, "¿Deseas continuar?",
