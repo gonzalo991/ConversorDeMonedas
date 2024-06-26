@@ -12,20 +12,21 @@ import java.util.List;
 
 public class Principal {
     public static void main(String[] args) {
-        OpcionesDeConversion[] opciones = OpcionesDeConversion.values();
+        do{
+            OpcionesDeConversion[] opciones = OpcionesDeConversion.values();
 
-        Object selectedValue = JOptionPane.showInputDialog(
-                null,
-                "Seleccione una opción de conversión",
-                "Input",
-                JOptionPane.INFORMATION_MESSAGE,
-                null,
-                opciones,
-                opciones[0]
-        );
+            Object selectedValue = JOptionPane.showInputDialog(
+                    null,
+                    "Seleccione una opción de conversión",
+                    "Input",
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null,
+                    opciones,
+                    opciones[0]
+            );
 
-        if(selectedValue == OpcionesDeConversion.CONVERSOR_DE_MONEDAS){
-            do{
+
+            if(selectedValue == OpcionesDeConversion.CONVERSOR_DE_MONEDAS){
                 ejecutarConversionDeMonedas();
                 int confirm = JOptionPane.showConfirmDialog(null, "¿Deseas continuar?",
                         "Select an option", JOptionPane.YES_NO_CANCEL_OPTION);
@@ -34,12 +35,14 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, "Programa terminado.");
                     break;
                 }
+            } else if(selectedValue == OpcionesDeConversion.CONVERSOR_DE_TEMPERATURA){
+                System.out.println(selectedValue);
+            } else {
+                JOptionPane.showMessageDialog(null, "Programa terminado.");
+                break;
+            };
 
-            }while(true);
-
-        } else if(selectedValue.equals("Conversor de temperatura")){
-            System.out.println(selectedValue);
-        }
+        }while(true);
     }
 
     public static List<ParesDeDivisas> getParesDeDivisas(ConversionDeMonedas moneda) {
