@@ -1,4 +1,4 @@
-package modelos;
+package enums;
 
 public enum ConversionDeMonedas {
     PESOS_A_DOLAR("De Pesos a Dólar"),

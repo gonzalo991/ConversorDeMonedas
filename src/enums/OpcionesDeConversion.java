@@ -1,4 +1,4 @@
-package modelos;
+package enums;
 
 public enum OpcionesDeConversion {
     CONVERSOR_DE_MONEDAS("Conversor de monedas"),
