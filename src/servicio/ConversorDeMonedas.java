@@ -17,7 +17,7 @@ public class ConversorDeMonedas {
     public Moneda convertirMoneda(String base_code, String target_code, float conversion_rate) throws UnsupportedEncodingException {
 
         // https://v6.exchangerate-api.com/v6/%s/pair/%s/%s/%d
-        String key = URLEncoder.encode("d4d919918f8225b3d183fdaa", StandardCharsets.UTF_8);
+        String key = URLEncoder.encode("d4d919918f8225b3d183fdaa", StandardCharsets.UTF_8.toString());
         String url = String.format("https://v6.exchangerate-api.com/v6/%s/pair/%s/%s/%f",
                 key, base_code, target_code, conversion_rate);
         URI direccion = URI.create(url);
